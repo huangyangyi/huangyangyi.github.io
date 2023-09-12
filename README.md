@@ -1,1 +1,1 @@
-This is the source code to Jon Barron's public academic website: https://jonbarron.info/. Feel free to clone this code for your own personal use.
+This is the source code to Yangyi Huang's public academic website: https://huangyangyi.github.io/. Forked from Jon Barron
