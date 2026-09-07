@@ -1,423 +1,700 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Yangyi Huang</title>
+<meta content="Yangyi Huang is a Ph.D. student at CUHK Sphere Lab. Research on foundation-model training, post-training, parameter-efficient adaptation, and model geometry." name="description"/>
+<meta content="Yangyi Huang" name="author"/>
+<meta content="#ffffff" name="theme-color"/>
+<meta content="Yangyi Huang" property="og:title"/>
+<meta content="Ph.D. student at CUHK. Foundation-model training, post-training, and model geometry." property="og:description"/>
+<meta content="website" property="og:type"/>
+<style>
 
-    <title>Yangyi Huang</title>
+/* A narrow reading column. Change --page-width to adjust the entire page. */
+:root {
+  --page-width: 780px;
+  --ink: #272b30;
+  --muted: #686d73;
+  --accent: #365b73;
+  --rule: #e5e7e9;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "PingFang SC", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 28px; }
+body { margin: 0; background: #fff; color: var(--ink); font: 15.5px/1.75 var(--sans); -webkit-font-smoothing: antialiased; }
+::selection { background: #e1ebf1; }
+a { color: var(--accent); text-decoration: none; text-underline-offset: 3px; }
+a:hover { text-decoration: underline; }
+button, summary { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible, summary:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+button { font: inherit; cursor: pointer; }
+h1, h2, h3, h4, p, figure { margin: 0; }
+strong { font-weight: 600; }
+sup { font-size: .7em; }
+[hidden] { display: none !important; }
+.page { width: min(var(--page-width), calc(100% - 48px)); margin: 0 auto; padding: 60px 0 30px; }
+.skip-link { position: fixed; left: 16px; top: -100px; z-index: 50; padding: 8px 12px; background: white; border: 1px solid var(--rule); }
+.skip-link:focus { top: 12px; }
+.intro { margin-bottom: 35px; }
+h1 { font: 400 37px/1.2 Georgia, "Times New Roman", serif; letter-spacing: -.8px; margin-bottom: 23px; }
+.name-cn { font: 400 20px/1.3 var(--sans); letter-spacing: .04em; margin-left: 12px; color: #555d65; white-space: nowrap; }
+.intro-row { display: block; }
+.intro.has-portrait .intro-row { display: grid; grid-template-columns: minmax(0, 1fr) 142px; gap: 34px; align-items: start; }
+.biography p + p { margin-top: 11px; }
+.biography .previous { color: #575e65; font-size: 14px; }
+.portrait { margin-top: 4px; }
+.portrait img { width: 142px; height: 172px; display: block; object-fit: cover; border-radius: 2px; }
+.profile-links { display: flex; flex-wrap: wrap; gap: 0; margin-top: 16px; font-size: 14px; }
+.profile-links a + a::before { content: "/"; display: inline-block; margin: 0 11px; color: #b1b6bb; text-decoration: none; }
+.section { margin-top: 35px; }
+.section > h2, .section-heading h2 { font-size: 21px; line-height: 1.35; font-weight: 600; letter-spacing: -.3px; }
+.section > h2 { margin-bottom: 15px; }
+.news-list { list-style: none; margin: 0; padding: 0; font-size: 13.5px; }
+.news-list li { display: grid; grid-template-columns: 44px minmax(0,1fr); gap: 13px; margin-bottom: 7px; }
+.news-list time { color: #858b90; font-size: 12px; padding-top: 2px; font-variant-numeric: tabular-nums; }
+.news-list strong { font-weight: 600; }
+.research { margin-top: 37px; }
+.section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 15px; margin-bottom: 17px; }
+.section-heading .note { color: #92969a; font-size: 11px; white-space: nowrap; }
+.group-title { font-size: 12px; font-weight: 400; color: #777f86; margin-bottom: 15px; }
+.paper { margin: 0 0 25px; scroll-margin-top: 28px; }
+.paper h3 { font-size: 16.5px; line-height: 1.5; font-weight: 600; margin-bottom: 4px; letter-spacing: -.08px; }
+.paper h3 a { color: var(--ink); }
+.paper h3 a:hover { color: var(--accent); }
+.paper .authors { font-size: 13px; line-height: 1.7; color: var(--muted); margin-bottom: 2px; }
+.paper .authors strong { color: #373c42; }
+.paper .venue { font-size: 12.5px; line-height: 1.65; margin-bottom: 5px; color: #505a64; }
+.paper .venue .accepted { color: var(--accent); font-weight: 500; }
+.paper .summary { font-size: 14px; line-height: 1.65; color: #5b6167; margin-bottom: 5px; }
+.paper-links { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 14px; row-gap: 2px; font-size: 12.5px; line-height: 1.7; }
+.paper-links > * { margin-left: 0; }
+.text-button { color: var(--accent); background: none; border: 0; padding: 0; font: inherit; }
+.text-button:hover { text-decoration: underline; text-underline-offset: 3px; }
+.paper-preview { position: relative; margin: 0; }
+.paper-preview > summary { list-style: none; cursor: pointer; color: var(--accent); }
+.paper-preview > summary::-webkit-details-marker { display: none; }
+.paper-preview > summary:hover { text-decoration: underline; text-underline-offset: 3px; }
+.paper-preview > summary::after { content: " +"; font-size: 11px; color: #8b939a; }
+.paper-preview[open] > summary::after { content: " −"; }
+/* The figure moves below the complete links row, instead of squeezing text. */
+.paper-preview[open] { flex-basis: 100%; margin: 7px 0 0; }
+.paper-preview figure { margin-top: 10px; max-width: 600px; }
+.paper-preview img, .paper-preview video { display: block; max-width: 100%; max-height: 300px; margin: 0; object-fit: contain; }
+.paper-preview figcaption, .media-status { color: var(--muted); font-size: 12px; margin-top: 5px; }
+.earlier-divider { padding-top: 19px; margin: 3px 0 18px; border-top: 1px solid var(--rule); }
+.more-papers { margin-top: -4px; }
+.more-papers > summary { cursor: pointer; color: var(--accent); font-size: 13px; width: fit-content; }
+.more-papers > summary:hover { text-decoration: underline; text-underline-offset: 3px; }
+.more-papers[open] > summary { margin-bottom: 22px; }
+.more-papers .paper { margin-bottom: 20px; }
+.more-papers .summary { display: none; }
+.background { border-top: 1px solid var(--rule); padding-top: 25px; margin-top: 31px; }
+.background-group + .background-group { margin-top: 23px; }
+.background-group > h3 { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.background-row { display: grid; grid-template-columns: minmax(0,1fr) 148px; gap: 18px; margin-bottom: 10px; font-size: 13px; }
+.background-row .institution { font-weight: 500; }
+.background-row p { color: #737981; font-size: 12.5px; }
+.background-row time { text-align: right; white-space: nowrap; font-size: 12px; color: #7e848a; line-height: 1.8; }
+.earlier-note { font-size: 12.5px; color: #737981; }
+.service p { font-size: 13px; color: #626970; margin-bottom: 6px; }
+.service p strong { color: #454c52; }
+.footer { margin-top: 38px; padding-top: 14px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 14px; font-size: 11px; color: #93989d; }
+.footer a { color: #737b82; }
+/* Supplementary CV and citation dialogs use the same plain reading style. */
+dialog { color: var(--ink); background: #fff; border: 1px solid #d7dce0; border-radius: 3px; padding: 0; width: min(860px, calc(100% - 36px)); max-height: 90dvh; }
+dialog::backdrop { background: rgb(25 31 36 / .28); }
+.dialog-toolbar { position: sticky; top: 0; background: white; display: flex; justify-content: space-between; align-items: center; padding: 11px 22px; border-bottom: 1px solid var(--rule); z-index: 2; font-size: 13px; }
+.dialog-actions { display: flex; align-items: center; gap: 20px; }
+.dialog-actions button, .citation-actions button { background: white; color: var(--accent); border: none; padding: 4px 0; font-size: 12px; }
+.dialog-actions button:hover, .citation-actions button:hover { text-decoration: underline; }
+.dialog-close { font-size: 19px !important; min-width: 28px; min-height: 30px; line-height: 1; }
+.cv-sheet { padding: 30px 42px 42px; font-size: 13px; line-height: 1.6; }
+.cv-header .eyebrow { color: var(--muted); font-size: 11px; }
+.cv-header h1 { font-size: 32px; margin: 8px 0 8px; }
+.cv-header h1 span { font: 17px var(--sans); letter-spacing: 0; margin-left: 9px; color: var(--muted); }
+.cv-header p { font-size: 12px; }
+.cv-sheet section { margin-top: 24px; }
+.cv-sheet h2 { font-size: 17px; line-height: 1.3; border-bottom: 1px solid var(--rule); padding-bottom: 5px; margin-bottom: 11px; }
+.cv-sheet .timeline-item { margin-bottom: 10px; }
+.cv-sheet .timeline-item h4 { font-size: 13px; font-weight: 600; padding-right: 130px; }
+.cv-sheet .date { float: right; color: #717880; font-size: 11px; }
+.cv-sheet .detail { font-size: 12px; color: #69717a; }
+.cv-note { font-size: 11px; color: #717880; margin-bottom: 12px; }
+.cv-paper { margin-bottom: 14px; break-inside: avoid; }
+.cv-paper h3, .cv-paper-title { font-size: 13px; line-height: 1.5; font-weight: 600; margin-bottom: 3px; }
+.cv-paper > p:nth-child(2) { font-size: 11.5px; color: #606870; }
+.cv-meta { font-size: 11px; }
+.cv-meta a { margin-right: 10px; }
+.cv-paper .authors { font-size: 11px; color: #666e76; }
+.cv-paper .cv-venue { font-size: 11px; }
+.cv-paper a { font-size: 11px; }
+.cv-sheet ul { padding-left: 18px; font-size: 12px; }
+#cite-dialog { max-width: 690px; }
+.citation-body { padding: 22px; }
+.citation-body h3 { font-size: 18px; margin-bottom: 8px; }
+.citation-note { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+#citation-text { display: block; width: 100%; min-height: 260px; resize: vertical; padding: 14px; background: #fafbfc; border: 1px solid var(--rule); color: var(--ink); font: 12px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; }
+.citation-actions { display: flex; gap: 20px; justify-content: flex-end; margin-top: 14px; }
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: #303941; color: white; padding: 8px 16px; font-size: 13px; border-radius: 3px; z-index: 100; opacity: 0; pointer-events: none; transition: opacity .15s; }
+.toast.show { opacity: 1; }
+.cv-standalone { max-width: 860px; margin: 24px auto; }
+.cv-standalone .cv-sheet { padding-top: 20px; }
+@media (max-width: 620px) {
+  .page { width: calc(100% - 40px); padding-top: 36px; }
+  h1 { font-size: 32px; margin-bottom: 20px; }
+  .name-cn { font-size: 18px; margin-left: 9px; }
+  .intro.has-portrait .intro-row { grid-template-columns: minmax(0,1fr) 100px; gap: 20px; }
+  .portrait img { width: 100px; height: 124px; }
+  .biography { font-size: 14px; }
+  .biography .previous { font-size: 13px; }
+  .paper h3 { font-size: 15px; }
+  .paper .summary { font-size: 13px; }
+  .news-list { font-size: 13px; }
+  .news-list li { grid-template-columns: 36px minmax(0,1fr); gap: 10px; }
+  .section { margin-top: 29px; }
+  .section > h2, .section-heading h2 { font-size: 20px; }
+  .section-heading .note { font-size: 10px; }
+  .background-row { grid-template-columns: minmax(0,1fr) 105px; gap: 10px; }
+  .background-row time { font-size: 10.5px; }
+  .cv-sheet { padding: 22px; }
+  .dialog-toolbar { padding: 9px 15px; }
+  .dialog-actions { gap: 12px; }
+  .cv-sheet .date { float: none; }
+  .cv-sheet .timeline-item h4 { padding-right: 0; }
+}
+@media (max-width: 430px) {
+  .intro.has-portrait .intro-row { display: block; }
+  .intro.has-portrait .portrait { float: none; display: none; }
+  .name-cn { font-size: 17px; }
+  .profile-links a + a::before { margin: 0 9px; }
+  .background-row { grid-template-columns: 1fr; gap: 0; margin-bottom: 13px; }
+  .background-row time { grid-row: 1; text-align: left; font-size: 11px; }
+  .footer { flex-wrap: wrap; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+@media print {
+  @page { size: A4; margin: 17mm; }
+  body { font-size: 11pt; }
+  .page { width: 100%; max-width: none; padding: 0; }
+  .skip-link, .toast, .paper-preview, [data-cite], .dialog-toolbar, .no-print { display: none !important; }
+  .more-papers:not([open]) { display: none; }
+  .paper, .background-row { break-inside: avoid; }
+  a { color: inherit; }
+  .intro, .section { margin-top: 20px; }
+  body.cv-mode > :not(#cv-dialog) { display: none !important; }
+  body.cv-mode { overflow: visible !important; }
+  body.cv-mode #cv-dialog { display: block; position: static; margin: 0; padding: 0; max-height: none; height: auto; width: 100%; max-width: none; overflow: visible; border: 0; }
+  body.cv-mode #cv-dialog::backdrop { display: none; }
+  .cv-sheet { padding: 0; }
+  .cv-standalone { margin: 0; max-width: none; }
+  .cv-sheet .timeline-item { break-inside: avoid; }
+  .cv-sheet h2 { break-after: avoid; }
+}
 
-    <meta name="author" content="Yangyi Huang">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <link rel="icon" type="image/png" href="images/wong.png">
+/* Bilingual CV. These rules are deliberately scoped so the homepage is unchanged. */
+.cv-toolbar { gap: 12px; }
+.cv-toolbar > [data-cv-label], .cv-toolbar > [data-cv-back] { flex-shrink: 0; }
+.cv-toolbar .dialog-actions { min-width: 0; gap: 20px; }
+.cv-language-switch { display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; }
+.cv-language-switch > span { color: #a0a6ac; font-size: 12px; }
+.cv-toolbar .cv-language-switch button { min-width: 34px; min-height: 34px; padding: 4px 5px; color: #737981; }
+.cv-toolbar .cv-language-switch button[aria-pressed="true"] { color: var(--ink); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
+.cv-toolbar [data-print-cv] { white-space: nowrap; min-height: 34px; }
+.cv-contact { overflow-wrap: anywhere; }
+.cv-sheet:lang(zh-CN) { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; line-height: 1.85; line-break: strict; }
+.cv-sheet:lang(zh-CN) .cv-header h1 { font-family: "Songti SC", "STSong", "Noto Serif CJK SC", serif; font-weight: 500; letter-spacing: .08em; }
+.cv-sheet:lang(zh-CN) .cv-header h1 span { font-family: Georgia, "Times New Roman", serif; font-size: 19px; letter-spacing: 0; }
+.cv-sheet:lang(zh-CN) .cv-header p { line-height: 1.9; }
+.cv-sheet:lang(zh-CN) h2 { font-size: 16px; letter-spacing: .06em; }
+.cv-sheet:lang(zh-CN) .date { font-variant-numeric: tabular-nums; }
+.cv-sheet:lang(zh-CN) .cv-paper-title,
+.cv-sheet:lang(zh-CN) .cv-paper-authors { font-family: var(--sans); line-height: 1.6; }
+.cv-sheet .cv-meta { line-height: 1.8; }
+.cv-sheet .cv-meta a { white-space: nowrap; display: inline-block; }
+#cv-print-root { display: none; }
+.cv-standalone { width: min(860px, 100%); }
+@media (max-width: 560px) {
+  .cv-toolbar { flex-wrap: wrap; align-items: flex-start; gap: 0; padding: 8px 16px; }
+  .cv-toolbar > [data-cv-label], .cv-toolbar > [data-cv-back] { width: 100%; line-height: 24px; font-size: 12px; }
+  .cv-toolbar .dialog-actions { width: 100%; gap: 12px; }
+  .cv-toolbar .cv-language-switch { margin-right: auto; margin-left: -5px; }
+  .cv-toolbar .dialog-close { position: absolute; right: 12px; top: 6px; }
+  .cv-sheet .cv-header h1 { font-size: 29px; }
+  .cv-sheet .cv-header h1 span { font-size: 16px; }
+  .cv-sheet:lang(zh-CN) .cv-header h1 span { font-size: 17px; }
+  .cv-standalone { margin-top: 0; }
+}
+@media print {
+  /* Print a regular-flow copy, not a modal top-layer box: all pages can paginate. */
+  body.cv-printing > :not(#cv-print-root) { display: none !important; }
+  body.cv-printing, html:has(body.cv-printing) { height: auto !important; overflow: visible !important; }
+  body.cv-printing #cv-print-root { display: block !important; position: static !important; width: 100%; max-width: none; margin: 0; padding: 0; overflow: visible; }
+  #cv-print-root .cv-sheet { padding: 0; }
+  #cv-print-root .cv-header { break-inside: avoid; }
+  #cv-print-root .cv-sheet h2 { break-after: avoid; }
+  #cv-print-root .cv-sheet .timeline-item, #cv-print-root .cv-paper { break-inside: avoid; }
+  #cv-print-root .cv-contact a { color: inherit; }
+  #cv-print-root .cv-sheet { font-size: 13px; line-height: 1.6; }
+  #cv-print-root .cv-sheet section { margin-top: 18px; }
+  #cv-print-root .cv-sheet > section:nth-of-type(4) { break-before: page; margin-top: 0; }
+  #cv-print-root .cv-sheet > section:last-of-type { break-inside: avoid; }
+  #cv-print-root .cv-sheet .timeline-item { margin-bottom: 8px; }
+  #cv-print-root .cv-note { margin-bottom: 9px; break-after: avoid; }
+  #cv-print-root .cv-paper { margin-bottom: 5px; }
+  #cv-print-root .cv-sheet .cv-meta { line-height: 1.5; }
+}
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4ML2Y9ZT9M"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+</style>
+</head>
+<body>
+<a class="skip-link" href="#research">Skip to research</a>
+<main class="page">
+<header class="intro" id="top">
+<h1>Yangyi Huang <span class="name-cn" lang="zh-CN">黄洋逸</span></h1>
+<div class="intro-row">
+<div class="biography">
+<p>I am a Ph.D. student at <a href="https://www.cuhk.edu.hk/" rel="noopener noreferrer" target="_blank">The Chinese University of Hong Kong</a>, working with <a href="https://wyliu.com/" rel="noopener noreferrer" target="_blank">Weiyang Liu</a> at <a href="https://spherelab.ai/" rel="noopener noreferrer" target="_blank">Sphere Lab</a>.</p>
+<p>My research focuses on <strong>training and adapting foundation models</strong>, especially post-training, parameter-efficient adaptation, and model geometry. I study how models acquire new capabilities while retaining existing ones.</p>
+<p class="previous">Previously, I worked on 3D vision and generative modeling, including research at <a href="https://research.nvidia.com/labs/dair/" rel="noopener noreferrer" target="_blank">NVIDIA</a>. I received my master’s and bachelor’s degrees from Zhejiang University, where I worked with <a href="http://www.cad.zju.edu.cn/home/dengcai/" rel="noopener noreferrer" target="_blank">Deng Cai</a>.</p>
+<nav aria-label="Profile links" class="profile-links">
+<a href="mailto:yyhuang@link.cuhk.edu.hk">Email</a>
+<a href="https://scholar.google.com/citations?user=MzGqlqIAAAAJ&amp;hl=en" rel="noopener noreferrer" target="_blank">Google Scholar</a>
+<a href="https://github.com/huangyangyi/" rel="noopener noreferrer" target="_blank">GitHub</a>
+<a data-open-cv="" href="cv.html">CV</a>
+<a href="https://twitter.com/yangyi_huang_cn" rel="noopener noreferrer" target="_blank">X</a>
+</nav>
+</div>
+<figure class="portrait" hidden="">
+<img alt="Profile photograph" decoding="async" height="172" id="portrait-img" src="images/YangyiHuang.jpg?v=20260907" width="142"/>
+</figure>
+</div>
+</header>
+<section aria-labelledby="news-heading" class="section news">
+<h2 id="news-heading">News</h2>
+<ul class="news-list">
+<li><time>2026</time><p><a href="#peft">PEFT-Arena</a> accepted to <strong>EMNLP Findings</strong>; <a href="#besiege">BesiegeField</a> accepted to <strong>EMNLP Main</strong>.</p></li>
+<li><time>2026</time><p><a href="#sgp">Symbolic Graphics Programming</a> accepted to <strong>TMLR</strong>.</p></li>
+<li><time>2025</time><p><a href="#adahuman">AdaHuman</a> accepted to <strong>ICCV</strong>. Recognized as an <strong>Outstanding Reviewer</strong> at CVPR.</p></li>
+</ul>
+</section>
+<section aria-labelledby="research-heading" class="section research" id="research">
+<div class="section-heading"><h2 id="research-heading">Research</h2><span class="note">* Equal contribution</span></div>
+<article class="paper" id="peft">
+<h3><a href="https://arxiv.org/abs/2605.28819" rel="noopener noreferrer" target="_blank">PEFT-Arena: Understanding Parameter-Efficient Finetuning from a Stability-Plasticity Perspective</a></h3>
+<p class="authors"><strong>Yangyi Huang</strong><sup>*</sup>, Ruotian Peng<sup>*</sup>, Zeju Qiu, Jiale Kang, Yandong Wen, Bernhard Schölkopf, Weiyang Liu</p>
+<p class="venue"><span class="accepted">Findings of EMNLP 2026</span></p>
+<p class="summary">Evaluating what models learn and what they retain—and studying the geometry of parameter-efficient updates under supervised and reinforcement-learning post-training.</p>
+<div class="paper-links"><a href="https://arxiv.org/abs/2605.28819" rel="noopener noreferrer" target="_blank">Paper</a>
+<a href="https://github.com/Sphere-AI-Lab/PEFT-Arena" rel="noopener noreferrer" target="_blank">Code</a>
+<a href="https://spherelab.ai/PEFT-Arena/" rel="noopener noreferrer" target="_blank">Project</a>
+<button class="text-button" data-cite="peft" hidden="" type="button">BibTeX</button>
+<details class="paper-preview"><summary>Preview</summary>
+<figure><img alt="PEFT-Arena overview: target–retention evaluation, internal geometry analysis, and interpolation." data-src="https://spherelab.ai/PEFT-Arena/static/images/teaser-overview.png" decoding="async" hidden=""/><p class="media-status" hidden="">Loading preview…</p>
+<figcaption><a href="https://spherelab.ai/PEFT-Arena/static/images/teaser-overview.png" rel="noopener noreferrer" target="_blank">View original</a></figcaption></figure>
+</details></div>
+</article><article class="paper" id="besiege">
+<h3><a href="https://arxiv.org/abs/2510.14980" rel="noopener noreferrer" target="_blank">Compositional Machine Design as Program Synthesis with LLMs</a></h3>
+<p class="authors">Wenqian Zhang, <strong>Yangyi Huang</strong>, Weiyang Liu, Zhen Liu</p>
+<p class="venue"><span class="accepted">EMNLP 2026 · Main Conference</span></p>
+<p class="summary">A physically grounded testbed in which LLM agents write machine-construction programs, simulate their behavior, and refine designs using physical feedback.</p>
+<div class="paper-links"><a href="https://arxiv.org/abs/2510.14980" rel="noopener noreferrer" target="_blank">Paper</a>
+<a href="https://github.com/Godheritage/BesiegeField" rel="noopener noreferrer" target="_blank">Code</a>
+<a href="https://besiegefield.github.io/" rel="noopener noreferrer" target="_blank">Project</a>
+<button class="text-button" data-cite="besiege" hidden="" type="button">BibTeX</button>
+<details class="paper-preview"><summary>Preview</summary>
+<figure><img alt="BesiegeField movement task: a constructed machine on rocky terrain." data-src="https://besiegefield.github.io/figures/movement_rocky.png" decoding="async" hidden=""/><p class="media-status" hidden="">Loading preview…</p>
+<figcaption><a href="https://besiegefield.github.io/figures/movement_rocky.png" rel="noopener noreferrer" target="_blank">View original</a></figcaption></figure>
+</details></div>
+</article><article class="paper" id="orbit">
+<h3><a href="https://spherelab.ai/orbit/" rel="noopener noreferrer" target="_blank">Orbit: Stable and Efficient Reinforcement Learning for Trillion-Parameter LLMs</a></h3>
+<p class="authors">Zeju Qiu<sup>*</sup>, Le Chen<sup>*</sup>, Lixin Liu<sup>*</sup>, Tim Z. Xiao, Yao Feng, <strong>Yangyi Huang</strong>, Zhen Liu, Han Shi, Yandong Wen, Zhouliang Yu, Bernhard Schölkopf, Weiyang Liu</p>
+<p class="venue"><span class="">Open-source project · 2026</span></p>
+<p class="summary">Deployment-aligned RL with a frozen low-precision base and trainable adapters, enabling trillion-scale post-training on a single GPU node.</p>
+<div class="paper-links"><a href="https://spherelab.ai/orbit/" rel="noopener noreferrer" target="_blank">Project &amp; report</a>
+<button class="text-button" data-cite="orbit" hidden="" type="button">BibTeX</button></div>
+</article><article class="paper" id="sgp">
+<h3><a href="https://arxiv.org/abs/2509.05208" rel="noopener noreferrer" target="_blank">Symbolic Graphics Programming with Large Language Models</a></h3>
+<p class="authors">Yamei Chen<sup>*</sup>, Haoquan Zhang<sup>*</sup>, <strong>Yangyi Huang</strong>, Zeju Qiu, Kaipeng Zhang, Yandong Wen, Weiyang Liu</p>
+<p class="venue"><span class="">TMLR · 2026</span></p>
+<p class="summary">Benchmarking symbolic graphics generation and improving it with reinforcement learning from renderability checks and cross-modal visual rewards.</p>
+<div class="paper-links"><a href="https://arxiv.org/abs/2509.05208" rel="noopener noreferrer" target="_blank">Paper</a>
+<a href="https://github.com/Sphere-AI-Lab/SGP-RL" rel="noopener noreferrer" target="_blank">Code</a>
+<a href="https://spherelab.ai/SGP-Gen/" rel="noopener noreferrer" target="_blank">Project</a>
+<button class="text-button" data-cite="sgp" hidden="" type="button">BibTeX</button></div>
+</article>
+<div class="earlier-divider"><h3 class="group-title">Earlier work in vision &amp; graphics</h3></div>
+<article class="paper" id="adahuman">
+<h3><a href="https://arxiv.org/abs/2505.24877" rel="noopener noreferrer" target="_blank">AdaHuman: Animatable Detailed 3D Human Generation with Compositional Multiview Diffusion</a></h3>
+<p class="authors"><strong>Yangyi Huang</strong>, Ye Yuan, Xueting Li, Jan Kautz, Umar Iqbal</p>
+<p class="venue"><span class="">ICCV · 2025</span></p>
+<p class="summary">Detailed, animation-ready 3D humans from a single image using pose-conditioned joint diffusion and compositional 3D Gaussian refinement.</p>
+<div class="paper-links"><a href="https://arxiv.org/abs/2505.24877" rel="noopener noreferrer" target="_blank">Paper</a>
+<a href="https://nvlabs.github.io/AdaHuman/" rel="noopener noreferrer" target="_blank">Project</a>
+<button class="text-button" data-cite="adahuman" hidden="" type="button">BibTeX</button>
+<details class="paper-preview"><summary>Preview</summary>
+<figure><video aria-label="AdaHuman reconstruction and animation results." controls="" data-src="https://huangyangyi.github.io/images/adahuman.mp4" hidden="" muted="" playsinline="" preload="none"></video><p class="media-status" hidden="">Loading preview…</p>
+<figcaption><a href="https://huangyangyi.github.io/images/adahuman.mp4" rel="noopener noreferrer" target="_blank">View original</a></figcaption></figure>
+</details></div>
+</article><article class="paper" id="tech">
+<h3><a href="https://arxiv.org/abs/2308.08545" rel="noopener noreferrer" target="_blank">TeCH: Text-guided Reconstruction of Lifelike Clothed Humans</a></h3>
+<p class="authors"><strong>Yangyi Huang</strong><sup>*</sup>, Hongwei Yi<sup>*</sup>, Yuliang Xiu<sup>*</sup>, Tingting Liao, Jiaxiang Tang, Deng Cai, Justus Thies</p>
+<p class="venue"><span class="">3DV · 2024</span></p>
+<p class="summary">Reconstructing detailed, textured clothed humans from a single image with textual guidance and a personalized text-to-image prior.</p>
+<div class="paper-links"><a href="https://arxiv.org/abs/2308.08545" rel="noopener noreferrer" target="_blank">Paper</a>
+<a href="https://github.com/huangyangyi/TeCH" rel="noopener noreferrer" target="_blank">Code</a>
+<a href="https://huangyangyi.github.io/TeCH/" rel="noopener noreferrer" target="_blank">Project</a>
+<button class="text-button" data-cite="tech" hidden="" type="button">BibTeX</button>
+<details class="paper-preview"><summary>Preview</summary>
+<figure><img alt="TeCH single-image clothed-human reconstruction results." data-src="https://huangyangyi.github.io/images/tech.png" decoding="async" hidden=""/><p class="media-status" hidden="">Loading preview…</p>
+<figcaption><a href="https://huangyangyi.github.io/images/tech.png" rel="noopener noreferrer" target="_blank">View original</a></figcaption></figure>
+</details></div>
+</article>
+<details class="more-papers" id="more-publications">
+<summary>More publications (5)</summary>
+<article class="paper" id="gavatar">
+<h3><a href="https://arxiv.org/abs/2312.11461" rel="noopener noreferrer" target="_blank">GAvatar: Animatable 3D Gaussian Avatars with Implicit Mesh Learning</a></h3>
+<p class="authors">Ye Yuan<sup>*</sup>, Xueting Li<sup>*</sup>, <strong>Yangyi Huang</strong>, Shalini De Mello, Koki Nagano, Jan Kautz, Umar Iqbal</p>
+<p class="venue"><span class="">CVPR 2024 · Highlight</span></p>
+<p class="summary">Animatable Gaussian avatars with implicit mesh learning for text-driven 3D human generation.</p>
+<div class="paper-links"><a href="https://arxiv.org/abs/2312.11461" rel="noopener noreferrer" target="_blank">Paper</a>
+<a href="https://nvlabs.github.io/GAvatar" rel="noopener noreferrer" target="_blank">Project</a>
+<button class="text-button" data-cite="gavatar" hidden="" type="button">BibTeX</button>
+<details class="paper-preview"><summary>Preview</summary>
+<figure><img alt="GAvatar project preview." data-src="https://huangyangyi.github.io/images/gavatar_tn.jpg" decoding="async" hidden=""/><p class="media-status" hidden="">Loading preview…</p>
+<figcaption><a href="https://huangyangyi.github.io/images/gavatar_tn.jpg" rel="noopener noreferrer" target="_blank">View original</a></figcaption></figure>
+</details></div>
+</article><article class="paper" id="tada">
+<h3><a href="https://arxiv.org/abs/2308.10899" rel="noopener noreferrer" target="_blank">TADA! Text to Animatable Digital Avatars</a></h3>
+<p class="authors">Tingting Liao<sup>*</sup>, Hongwei Yi<sup>*</sup>, Yuliang Xiu, Jiaxiang Tang, <strong>Yangyi Huang</strong>, Justus Thies, Michael J. Black</p>
+<p class="venue"><span class="">3DV · 2024</span></p>
+<p class="summary">Expressive, animatable 3D avatars generated from text descriptions.</p>
+<div class="paper-links"><a href="https://arxiv.org/abs/2308.10899" rel="noopener noreferrer" target="_blank">Paper</a>
+<a href="https://github.com/TingtingLiao/TADA" rel="noopener noreferrer" target="_blank">Code</a>
+<a href="https://tada.is.tue.mpg.de/" rel="noopener noreferrer" target="_blank">Project</a>
+<button class="text-button" data-cite="tada" hidden="" type="button">BibTeX</button>
+<details class="paper-preview"><summary>Preview</summary>
+<figure><img alt="TADA text-to-avatar examples." data-src="https://huangyangyi.github.io/images/tada.jpg" decoding="async" hidden=""/><p class="media-status" hidden="">Loading preview…</p>
+<figcaption><a href="https://huangyangyi.github.io/images/tada.jpg" rel="noopener noreferrer" target="_blank">View original</a></figcaption></figure>
+</details></div>
+</article><article class="paper" id="elicit">
+<h3><a href="https://arxiv.org/abs/2212.02469" rel="noopener noreferrer" target="_blank">One-shot Implicit Animatable Avatars with Model-based Priors</a></h3>
+<p class="authors"><strong>Yangyi Huang</strong><sup>*</sup>, Hongwei Yi<sup>*</sup>, Weiyang Liu, Haofan Wang, Boxi Wu, Wenxiao Wang, Binbin Lin, Debing Zhang, Deng Cai</p>
+<p class="venue"><span class="">ICCV · 2023</span></p>
+<p class="summary">One-shot animatable avatar reconstruction with geometric and semantic model-based priors.</p>
+<div class="paper-links"><a href="https://arxiv.org/abs/2212.02469" rel="noopener noreferrer" target="_blank">Paper</a>
+<a href="https://github.com/huangyangyi/ELICIT" rel="noopener noreferrer" target="_blank">Code</a>
+<a href="https://huangyangyi.github.io/ELICIT/" rel="noopener noreferrer" target="_blank">Project</a>
+<button class="text-button" data-cite="elicit" hidden="" type="button">BibTeX</button>
+<details class="paper-preview"><summary>Preview</summary>
+<figure><img alt="ELICIT animatable avatar reconstruction examples." data-src="https://huangyangyi.github.io/images/elicit.png" decoding="async" hidden=""/><p class="media-status" hidden="">Loading preview…</p>
+<figcaption><a href="https://huangyangyi.github.io/images/elicit.png" rel="noopener noreferrer" target="_blank">View original</a></figcaption></figure>
+</details></div>
+</article><article class="paper" id="bevformer">
+<h3><a href="https://storage.googleapis.com/waymo-uploads/files/research/3DCam/3DCam_BEVFormer.pdf" rel="noopener noreferrer" target="_blank">BEVFormer++: Improving BEVFormer for 3D Camera-only Object Detection</a></h3>
+<p class="authors">Zhiqi Li<sup>*</sup>, Hanming Deng<sup>*</sup>, Tianyu Li<sup>*</sup>, <strong>Yangyi Huang</strong><sup>*</sup>, Chonghao Sima<sup>*</sup>, Xiangwei Geng<sup>*</sup>, Yulu Gao<sup>*</sup>, Wenhai Wang<sup>*</sup>, Yang Li, Lewei Lu</p>
+<p class="venue"><span class="">Waymo Challenge · 2022</span></p>
+<p class="summary">First-place solution in the 2022 Waymo Open Dataset Challenge’s camera-only 3D detection track.</p>
+<div class="paper-links"><a href="https://storage.googleapis.com/waymo-uploads/files/research/3DCam/3DCam_BEVFormer.pdf" rel="noopener noreferrer" target="_blank">Report</a>
+<button class="text-button" data-cite="bevformer" hidden="" type="button">BibTeX</button></div>
+</article><article class="paper" id="fuseformer">
+<h3><a href="https://arxiv.org/abs/2109.02974" rel="noopener noreferrer" target="_blank">FuseFormer: Fusing Fine-Grained Information in Transformers for Video Inpainting</a></h3>
+<p class="authors">Rui Liu<sup>*</sup>, Hanming Deng<sup>*</sup>, <strong>Yangyi Huang</strong><sup>*</sup>, Xiaoyu Shi, Lewei Lu, Wenxiu Sun, Xiaogang Wang, Jifeng Dai, Hongsheng Li</p>
+<p class="venue"><span class="">ICCV · 2021</span></p>
+<p class="summary">Fine-grained feature fusion in transformers for sharp, temporally coherent video inpainting.</p>
+<div class="paper-links"><a href="https://arxiv.org/abs/2109.02974" rel="noopener noreferrer" target="_blank">Paper</a>
+<a href="https://github.com/ruiliu-ai/FuseFormer" rel="noopener noreferrer" target="_blank">Code</a>
+<button class="text-button" data-cite="fuseformer" hidden="" type="button">BibTeX</button>
+<details class="paper-preview"><summary>Preview</summary>
+<figure><img alt="FuseFormer video inpainting method preview." data-src="https://huangyangyi.github.io/images/fuseformer.png" decoding="async" hidden=""/><p class="media-status" hidden="">Loading preview…</p>
+<figcaption><a href="https://huangyangyi.github.io/images/fuseformer.png" rel="noopener noreferrer" target="_blank">View original</a></figcaption></figure>
+</details></div>
+</article>
+</details>
+</section>
+<section aria-labelledby="background-heading" class="section background" id="background">
+<h2 id="background-heading">Background</h2>
+<div class="background-group">
+<h3>Education</h3>
+<div class="background-row"><div><span class="institution">The Chinese University of Hong Kong</span><p>Ph.D. student, Computer Science and Engineering · Advisor: Weiyang Liu</p></div><time>Aug. 2025 – Present</time></div>
+<div class="background-row"><div><span class="institution">Zhejiang University</span><p>M.Eng., Software Engineering · Advisor: Deng Cai</p></div><time>Sep. 2021 – Jun. 2024</time></div>
+<div class="background-row"><div><span class="institution">Zhejiang University</span><p>B.Eng., Computer Science · Chu Kochen Honors College</p></div><time>Sep. 2017 – Jun. 2021</time></div>
+</div>
+<div class="background-group">
+<h3>Research experience</h3>
+<div class="background-row"><div><span class="institution">Westlake University</span><p>Research assistant · Yandong Wen</p></div><time>Jan. 2025 – Jul. 2025</time></div>
+<div class="background-row"><div><span class="institution">NVIDIA Research</span><p>Research intern · Ye Yuan and Umar Iqbal</p></div><time>Nov. 2023 – Aug. 2024</time></div>
+<div class="background-row"><div><span class="institution">Xiaohongshu</span><p>Research intern, Creative AI · Hongwei Yi</p></div><time>Sep. 2022 – Aug. 2023</time></div>
+<p class="earlier-note">Earlier research internship at SenseTime Research.</p>
+</div>
+</section>
+<section aria-labelledby="service-heading" class="section service">
+<h2 id="service-heading">Service</h2>
+<p><strong>Outstanding Reviewer</strong>, CVPR 2025.</p>
+<p>Reviewer for CVPR, ICCV, TVCG, SIGGRAPH, and ACM Multimedia.</p>
+</section>
+<footer class="footer"><span>Updated September 2026</span><a href="mailto:yyhuang@link.cuhk.edu.hk">yyhuang@link.cuhk.edu.hk</a></footer>
+</main>
+<dialog aria-labelledby="cv-label" data-cv-lang="en" data-cv-root="" id="cv-dialog" lang="en"><div class="dialog-toolbar cv-toolbar"><span data-cv-label="" id="cv-label">Curriculum vitae</span><div class="dialog-actions">
+<div aria-label="CV language / 简历语言" class="cv-language-switch" role="group">
+<button aria-controls="cv-content-en" aria-pressed="true" data-cv-language="en" lang="en" type="button">EN</button><span aria-hidden="true">/</span><button aria-controls="cv-content-zh" aria-pressed="false" data-cv-language="zh" lang="zh-CN" type="button">中文</button>
+</div><button data-print-cv="" type="button">Print / Save PDF</button><button aria-label="Close curriculum vitae" class="dialog-close" data-cv-close="" type="button">✕</button></div></div><div class="cv-sheet" data-cv-panel="en" id="cv-content-en" lang="en"><header class="cv-header"><p class="eyebrow">Curriculum vitae · September 2026</p><h1>Yangyi Huang <span lang="zh-CN">黄洋逸</span></h1><p>Ph.D. student · Computer Science and Engineering · The Chinese University of Hong Kong</p><p class="cv-contact"><a href="mailto:yyhuang@link.cuhk.edu.hk">yyhuang@link.cuhk.edu.hk</a> · <a href="https://huangyangyi.github.io/">Homepage</a> · <a href="https://scholar.google.com/citations?user=MzGqlqIAAAAJ">Google Scholar</a> · <a href="https://github.com/huangyangyi">GitHub</a></p></header><section><h2>Research interests</h2><p>Foundation-model training, post-training, parameter-efficient adaptation, and model geometry.</p></section><section><h2>Education</h2><div class="timeline-item"><div class="date">Aug. 2025 — Present</div><h4>The Chinese University of Hong Kong</h4><p>Ph.D. student, Computer Science and Engineering</p><p class="detail">Advisor: Weiyang Liu</p></div><div class="timeline-item"><div class="date">Sep. 2021 — Jun. 2024</div><h4>Zhejiang University</h4><p>M.Eng., Software Engineering</p><p class="detail">Advisor: Deng Cai · State Key Lab of CAD&amp;CG</p></div><div class="timeline-item"><div class="date">Sep. 2017 — Jun. 2021</div><h4>Zhejiang University</h4><p>B.Eng., Computer Science</p><p class="detail">Chu Kochen Honors College</p></div></section><section><h2>Research experience</h2>
+<div class="timeline-item"><div class="date">Aug. 2025 — Present</div><h4>Sphere Lab, CUHK</h4><p>Ph.D. researcher</p><p class="detail">Working with Weiyang Liu</p></div>
+<div class="timeline-item"><div class="date">Jan. 2025 — Jul. 2025</div><h4>Westlake University</h4><p>Research assistant</p><p class="detail">Working with Yandong Wen</p></div>
+<div class="timeline-item"><div class="date">Nov. 2023 — Aug. 2024</div><h4>NVIDIA Research</h4><p>Research intern</p><p class="detail">Working with Ye Yuan and Umar Iqbal</p></div>
+<div class="timeline-item"><div class="date">Sep. 2022 — Aug. 2023</div><h4>Xiaohongshu</h4><p>Research intern, Creative AI</p><p class="detail">Working with Hongwei Yi</p></div>
+<div class="timeline-item"><div class="date">2020 — 2022</div><h4>SenseTime Research</h4><p>Research intern</p></div>
+</section><section><h2>Selected publications &amp; research projects</h2><p class="cv-note">* Equal contribution.</p><article class="cv-paper"><p class="cv-paper-title" lang="en">PEFT-Arena: Understanding Parameter-Efficient Finetuning from a Stability-Plasticity Perspective</p><p class="cv-paper-authors" lang="en"><strong>Yangyi Huang</strong><sup>*</sup>, Ruotian Peng<sup>*</sup>, Zeju Qiu, Jiale Kang, Yandong Wen, Bernhard Schölkopf, Weiyang Liu</p><p class="cv-meta">Findings of EMNLP 2026  ·  <a href="https://arxiv.org/abs/2605.28819" rel="noopener noreferrer" target="_blank">Paper <span aria-hidden="true">↗</span></a><a href="https://github.com/Sphere-AI-Lab/PEFT-Arena" rel="noopener noreferrer" target="_blank">Code <span aria-hidden="true">↗</span></a><a href="https://spherelab.ai/PEFT-Arena/" rel="noopener noreferrer" target="_blank">Project <span aria-hidden="true">↗</span></a></p></article><article class="cv-paper"><p class="cv-paper-title" lang="en">Compositional Machine Design as Program Synthesis with LLMs</p><p class="cv-paper-authors" lang="en">Wenqian Zhang, <strong>Yangyi Huang</strong>, Weiyang Liu, Zhen Liu</p><p class="cv-meta">EMNLP 2026 · Main Conference  ·  <a href="https://arxiv.org/abs/2510.14980" rel="noopener noreferrer" target="_blank">Paper <span aria-hidden="true">↗</span></a><a href="https://github.com/Godheritage/BesiegeField" rel="noopener noreferrer" target="_blank">Code <span aria-hidden="true">↗</span></a><a href="https://besiegefield.github.io/" rel="noopener noreferrer" target="_blank">Project <span aria-hidden="true">↗</span></a></p></article><article class="cv-paper"><p class="cv-paper-title" lang="en">Orbit: Stable and Efficient Reinforcement Learning for Trillion-Parameter LLMs</p><p class="cv-paper-authors" lang="en">Zeju Qiu<sup>*</sup>, Le Chen<sup>*</sup>, Lixin Liu<sup>*</sup>, Tim Z. Xiao, Yao Feng, <strong>Yangyi Huang</strong>, Zhen Liu, Han Shi, Yandong Wen, Zhouliang Yu, Bernhard Schölkopf, Weiyang Liu</p><p class="cv-meta">Open-source project · 2026  ·  <a href="https://spherelab.ai/orbit/" rel="noopener noreferrer" target="_blank">Project &amp; report <span aria-hidden="true">↗</span></a></p></article><article class="cv-paper"><p class="cv-paper-title" lang="en">Symbolic Graphics Programming with Large Language Models</p><p class="cv-paper-authors" lang="en">Yamei Chen<sup>*</sup>, Haoquan Zhang<sup>*</sup>, <strong>Yangyi Huang</strong>, Zeju Qiu, Kaipeng Zhang, Yandong Wen, Weiyang Liu</p><p class="cv-meta">TMLR · 2026  ·  <a href="https://arxiv.org/abs/2509.05208" rel="noopener noreferrer" target="_blank">Paper <span aria-hidden="true">↗</span></a><a href="https://github.com/Sphere-AI-Lab/SGP-RL" rel="noopener noreferrer" target="_blank">Code <span aria-hidden="true">↗</span></a><a href="https://spherelab.ai/SGP-Gen/" rel="noopener noreferrer" target="_blank">Project <span aria-hidden="true">↗</span></a></p></article><article class="cv-paper"><p class="cv-paper-title" lang="en">AdaHuman: Animatable Detailed 3D Human Generation with Compositional Multiview Diffusion</p><p class="cv-paper-authors" lang="en"><strong>Yangyi Huang</strong>, Ye Yuan, Xueting Li, Jan Kautz, Umar Iqbal</p><p class="cv-meta">ICCV · 2025  ·  <a href="https://arxiv.org/abs/2505.24877" rel="noopener noreferrer" target="_blank">Paper <span aria-hidden="true">↗</span></a><a href="https://nvlabs.github.io/AdaHuman/" rel="noopener noreferrer" target="_blank">Project <span aria-hidden="true">↗</span></a></p></article><article class="cv-paper"><p class="cv-paper-title" lang="en">TeCH: Text-guided Reconstruction of Lifelike Clothed Humans</p><p class="cv-paper-authors" lang="en"><strong>Yangyi Huang</strong><sup>*</sup>, Hongwei Yi<sup>*</sup>, Yuliang Xiu<sup>*</sup>, Tingting Liao, Jiaxiang Tang, Deng Cai, Justus Thies</p><p class="cv-meta">3DV · 2024  ·  <a href="https://arxiv.org/abs/2308.08545" rel="noopener noreferrer" target="_blank">Paper <span aria-hidden="true">↗</span></a><a href="https://github.com/huangyangyi/TeCH" rel="noopener noreferrer" target="_blank">Code <span aria-hidden="true">↗</span></a><a href="https://huangyangyi.github.io/TeCH/" rel="noopener noreferrer" target="_blank">Project <span aria-hidden="true">↗</span></a></p></article><article class="cv-paper"><p class="cv-paper-title" lang="en">One-shot Implicit Animatable Avatars with Model-based Priors</p><p class="cv-paper-authors" lang="en"><strong>Yangyi Huang</strong><sup>*</sup>, Hongwei Yi<sup>*</sup>, Weiyang Liu, Haofan Wang, Boxi Wu, Wenxiao Wang, Binbin Lin, Debing Zhang, Deng Cai</p><p class="cv-meta">ICCV · 2023  ·  <a href="https://arxiv.org/abs/2212.02469" rel="noopener noreferrer" target="_blank">Paper <span aria-hidden="true">↗</span></a><a href="https://github.com/huangyangyi/ELICIT" rel="noopener noreferrer" target="_blank">Code <span aria-hidden="true">↗</span></a><a href="https://huangyangyi.github.io/ELICIT/" rel="noopener noreferrer" target="_blank">Project <span aria-hidden="true">↗</span></a></p></article></section><section><h2>Service &amp; selected honors</h2><p>Outstanding Reviewer, CVPR 2025.<br/>Reviewer for CVPR, ICCV, TVCG, SIGGRAPH, and ACM Multimedia.</p><p>Outstanding Graduate, Zhejiang University (master’s, 2024; undergraduate, 2021).<br/>Outstanding Intern of the Year, SenseTime (2021).<br/>Gold Medal, CCPC Jilin Regional, 4th place (2018).<br/>Gold Medal, ACM-ICPC Asia Xi’an Regional (2017).</p></section></div>
+<div class="cv-sheet" data-cv-panel="zh" hidden="" id="cv-content-zh" lang="zh-CN"><header class="cv-header"><p class="eyebrow">个人简历 · 2026 年 9 月</p><h1>黄洋逸 <span lang="en">Yangyi Huang</span></h1><p>香港中文大学 · 计算机科学与工程系 · 博士研究生</p><p class="cv-contact"><a href="mailto:yyhuang@link.cuhk.edu.hk">yyhuang@link.cuhk.edu.hk</a> · <a href="https://huangyangyi.github.io/">个人主页</a> · <a href="https://scholar.google.com/citations?user=MzGqlqIAAAAJ">谷歌学术</a> · <a href="https://github.com/huangyangyi">GitHub</a></p></header><section><h2>研究方向</h2><p>基础模型训练、大语言模型后训练、参数高效适配与模型几何。</p></section><section><h2>教育背景</h2><div class="timeline-item"><div class="date">2025.08 — 至今</div><h4>香港中文大学</h4><p>计算机科学与工程 · 博士在读</p><p class="detail">导师：Weiyang Liu</p></div><div class="timeline-item"><div class="date">2021.09 — 2024.06</div><h4>浙江大学</h4><p>软件工程 · 工学硕士</p><p class="detail">导师：Deng Cai · CAD&amp;CG 国家重点实验室</p></div><div class="timeline-item"><div class="date">2017.09 — 2021.06</div><h4>浙江大学</h4><p>计算机科学 · 工学学士</p><p class="detail">竺可桢学院</p></div></section><section><h2>研究与实习经历</h2>
+<div class="timeline-item"><div class="date">2025.08 — 至今</div><h4>香港中文大学 · Sphere Lab</h4><p>博士阶段研究</p><p class="detail">导师：Weiyang Liu</p></div>
+<div class="timeline-item"><div class="date">2025.01 — 2025.07</div><h4>西湖大学</h4><p>研究助理</p><p class="detail">合作导师：Yandong Wen</p></div>
+<div class="timeline-item"><div class="date">2023.11 — 2024.08</div><h4>NVIDIA Research</h4><p>研究实习生</p><p class="detail">合作导师：Ye Yuan、Umar Iqbal</p></div>
+<div class="timeline-item"><div class="date">2022.09 — 2023.08</div><h4>小红书</h4><p>研究实习生 · Creative AI</p><p class="detail">合作导师：Hongwei Yi</p></div>
+<div class="timeline-item"><div class="date">2020 — 2022</div><h4>商汤科技研究院</h4><p>研究实习生</p></div>
+</section><section><h2>代表论文与研究项目</h2><p class="cv-note">* 表示共同贡献。</p><article class="cv-paper"><p class="cv-paper-title" lang="en">PEFT-Arena: Understanding Parameter-Efficient Finetuning from a Stability-Plasticity Perspective</p><p class="cv-paper-authors" lang="en"><strong>Yangyi Huang</strong><sup>*</sup>, Ruotian Peng<sup>*</sup>, Zeju Qiu, Jiale Kang, Yandong Wen, Bernhard Schölkopf, Weiyang Liu</p><p class="cv-meta">Findings of EMNLP 2026  ·  <a href="https://arxiv.org/abs/2605.28819" rel="noopener noreferrer" target="_blank">论文 <span aria-hidden="true">↗</span></a><a href="https://github.com/Sphere-AI-Lab/PEFT-Arena" rel="noopener noreferrer" target="_blank">代码 <span aria-hidden="true">↗</span></a><a href="https://spherelab.ai/PEFT-Arena/" rel="noopener noreferrer" target="_blank">项目主页 <span aria-hidden="true">↗</span></a></p></article><article class="cv-paper"><p class="cv-paper-title" lang="en">Compositional Machine Design as Program Synthesis with LLMs</p><p class="cv-paper-authors" lang="en">Wenqian Zhang, <strong>Yangyi Huang</strong>, Weiyang Liu, Zhen Liu</p><p class="cv-meta">EMNLP 2026 · 主会  ·  <a href="https://arxiv.org/abs/2510.14980" rel="noopener noreferrer" target="_blank">论文 <span aria-hidden="true">↗</span></a><a href="https://github.com/Godheritage/BesiegeField" rel="noopener noreferrer" target="_blank">代码 <span aria-hidden="true">↗</span></a><a href="https://besiegefield.github.io/" rel="noopener noreferrer" target="_blank">项目主页 <span aria-hidden="true">↗</span></a></p></article><article class="cv-paper"><p class="cv-paper-title" lang="en">Orbit: Stable and Efficient Reinforcement Learning for Trillion-Parameter LLMs</p><p class="cv-paper-authors" lang="en">Zeju Qiu<sup>*</sup>, Le Chen<sup>*</sup>, Lixin Liu<sup>*</sup>, Tim Z. Xiao, Yao Feng, <strong>Yangyi Huang</strong>, Zhen Liu, Han Shi, Yandong Wen, Zhouliang Yu, Bernhard Schölkopf, Weiyang Liu</p><p class="cv-meta">开源研究项目 · 2026  ·  <a href="https://spherelab.ai/orbit/" rel="noopener noreferrer" target="_blank">项目与报告 <span aria-hidden="true">↗</span></a></p></article><article class="cv-paper"><p class="cv-paper-title" lang="en">Symbolic Graphics Programming with Large Language Models</p><p class="cv-paper-authors" lang="en">Yamei Chen<sup>*</sup>, Haoquan Zhang<sup>*</sup>, <strong>Yangyi Huang</strong>, Zeju Qiu, Kaipeng Zhang, Yandong Wen, Weiyang Liu</p><p class="cv-meta">TMLR · 2026  ·  <a href="https://arxiv.org/abs/2509.05208" rel="noopener noreferrer" target="_blank">论文 <span aria-hidden="true">↗</span></a><a href="https://github.com/Sphere-AI-Lab/SGP-RL" rel="noopener noreferrer" target="_blank">代码 <span aria-hidden="true">↗</span></a><a href="https://spherelab.ai/SGP-Gen/" rel="noopener noreferrer" target="_blank">项目主页 <span aria-hidden="true">↗</span></a></p></article><article class="cv-paper"><p class="cv-paper-title" lang="en">AdaHuman: Animatable Detailed 3D Human Generation with Compositional Multiview Diffusion</p><p class="cv-paper-authors" lang="en"><strong>Yangyi Huang</strong>, Ye Yuan, Xueting Li, Jan Kautz, Umar Iqbal</p><p class="cv-meta">ICCV · 2025  ·  <a href="https://arxiv.org/abs/2505.24877" rel="noopener noreferrer" target="_blank">论文 <span aria-hidden="true">↗</span></a><a href="https://nvlabs.github.io/AdaHuman/" rel="noopener noreferrer" target="_blank">项目主页 <span aria-hidden="true">↗</span></a></p></article><article class="cv-paper"><p class="cv-paper-title" lang="en">TeCH: Text-guided Reconstruction of Lifelike Clothed Humans</p><p class="cv-paper-authors" lang="en"><strong>Yangyi Huang</strong><sup>*</sup>, Hongwei Yi<sup>*</sup>, Yuliang Xiu<sup>*</sup>, Tingting Liao, Jiaxiang Tang, Deng Cai, Justus Thies</p><p class="cv-meta">3DV · 2024  ·  <a href="https://arxiv.org/abs/2308.08545" rel="noopener noreferrer" target="_blank">论文 <span aria-hidden="true">↗</span></a><a href="https://github.com/huangyangyi/TeCH" rel="noopener noreferrer" target="_blank">代码 <span aria-hidden="true">↗</span></a><a href="https://huangyangyi.github.io/TeCH/" rel="noopener noreferrer" target="_blank">项目主页 <span aria-hidden="true">↗</span></a></p></article><article class="cv-paper"><p class="cv-paper-title" lang="en">One-shot Implicit Animatable Avatars with Model-based Priors</p><p class="cv-paper-authors" lang="en"><strong>Yangyi Huang</strong><sup>*</sup>, Hongwei Yi<sup>*</sup>, Weiyang Liu, Haofan Wang, Boxi Wu, Wenxiao Wang, Binbin Lin, Debing Zhang, Deng Cai</p><p class="cv-meta">ICCV · 2023  ·  <a href="https://arxiv.org/abs/2212.02469" rel="noopener noreferrer" target="_blank">论文 <span aria-hidden="true">↗</span></a><a href="https://github.com/huangyangyi/ELICIT" rel="noopener noreferrer" target="_blank">代码 <span aria-hidden="true">↗</span></a><a href="https://huangyangyi.github.io/ELICIT/" rel="noopener noreferrer" target="_blank">项目主页 <span aria-hidden="true">↗</span></a></p></article></section><section><h2>学术服务与获奖</h2><p>CVPR 2025 优秀审稿人。<br/>担任 CVPR、ICCV、TVCG、SIGGRAPH、ACM Multimedia 审稿人。</p><p>浙江大学优秀毕业生（硕士：2024 年；本科：2021 年）。<br/>商汤科技年度优秀实习生（2021 年）。<br/>CCPC 吉林站金牌，第 4 名（2018 年）。<br/>ACM-ICPC 亚洲区域赛西安站金牌（2017 年）。</p></section></div></dialog>
+<dialog aria-labelledby="citation-label" id="cite-dialog">
+<div class="dialog-toolbar"><span id="citation-label">BibTeX</span><div class="dialog-actions"><button aria-label="Close citation" class="dialog-close" data-close-dialog="cite-dialog" type="button">×</button></div></div>
+<div class="citation-body">
+<h3 id="citation-title"></h3>
+<p class="citation-note">Draft citation for the linked preprint or project. Use the publisher’s record for the final proceedings citation.</p>
+<textarea aria-label="BibTeX citation" id="citation-text" readonly="" spellcheck="false"></textarea>
+<div class="citation-actions"><button id="download-citation" type="button">Download .bib</button><button id="copy-citation" type="button">Copy citation</button></div>
+</div>
+</dialog>
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
+<script id="paper-data" type="application/json">[{"id": "peft", "short": "PEFT-Arena", "title": "PEFT-Arena: Understanding Parameter-Efficient Finetuning from a Stability-Plasticity Perspective", "authors": ["Yangyi Huang*", "Ruotian Peng*", "Zeju Qiu", "Jiale Kang", "Yandong Wen", "Bernhard Schölkopf", "Weiyang Liu"], "year": 2026, "venue": "EMNLP 2026 · Findings", "category": "training", "selected": true, "featured": true, "summary": "Evaluating what models learn and what they retain—and studying the geometry of parameter-efficient updates under supervised and reinforcement-learning post-training.", "links": {"Paper": "https://arxiv.org/abs/2605.28819", "Code": "https://github.com/Sphere-AI-Lab/PEFT-Arena", "Project": "https://spherelab.ai/PEFT-Arena/"}, "media": {"type": "image", "url": "https://spherelab.ai/PEFT-Arena/static/images/teaser-overview.png", "alt": "PEFT-Arena overview: target–retention evaluation, internal geometry analysis, and interpolation."}}, {"id": "besiege", "short": "BesiegeField", "title": "Compositional Machine Design as Program Synthesis with LLMs", "authors": ["Wenqian Zhang", "Yangyi Huang", "Weiyang Liu", "Zhen Liu"], "year": 2026, "venue": "EMNLP 2026 · Main", "category": "programs", "selected": true, "featured": true, "summary": "A physically grounded testbed in which LLM agents write machine-construction programs, simulate their behavior, and refine designs using physical feedback.", "links": {"Paper": "https://arxiv.org/abs/2510.14980", "Code": "https://github.com/Godheritage/BesiegeField", "Project": "https://besiegefield.github.io/"}, "media": {"type": "image", "url": "https://besiegefield.github.io/figures/movement_rocky.png", "alt": "BesiegeField movement task: a constructed machine on rocky terrain."}}, {"id": "orbit", "short": "Orbit", "title": "Orbit: Stable and Efficient Reinforcement Learning for Trillion-Parameter LLMs", "authors": ["Zeju Qiu*", "Le Chen*", "Lixin Liu*", "Tim Z. Xiao", "Yao Feng", "Yangyi Huang", "Zhen Liu", "Han Shi", "Yandong Wen", "Zhouliang Yu", "Bernhard Schölkopf", "Weiyang Liu"], "year": 2026, "venue": "Open-source project · 2026", "category": "training", "selected": true, "summary": "Deployment-aligned RL with a frozen low-precision base and trainable adapters, enabling trillion-scale post-training on a single GPU node.", "links": {"Project & report": "https://spherelab.ai/orbit/"}}, {"id": "sgp", "short": "SGP-RL", "title": "Symbolic Graphics Programming with Large Language Models", "authors": ["Yamei Chen*", "Haoquan Zhang*", "Yangyi Huang", "Zeju Qiu", "Kaipeng Zhang", "Yandong Wen", "Weiyang Liu"], "year": 2026, "venue": "TMLR · 2026", "category": "programs", "selected": true, "summary": "Benchmarking symbolic graphics generation and improving it with reinforcement learning from renderability checks and cross-modal visual rewards.", "links": {"Paper": "https://arxiv.org/abs/2509.05208", "Code": "https://github.com/Sphere-AI-Lab/SGP-RL", "Project": "https://spherelab.ai/SGP-Gen/"}}, {"id": "adahuman", "short": "AdaHuman", "title": "AdaHuman: Animatable Detailed 3D Human Generation with Compositional Multiview Diffusion", "authors": ["Yangyi Huang", "Ye Yuan", "Xueting Li", "Jan Kautz", "Umar Iqbal"], "year": 2025, "venue": "ICCV · 2025", "category": "vision", "selected": true, "summary": "Detailed, animation-ready 3D humans from a single image using pose-conditioned joint diffusion and compositional 3D Gaussian refinement.", "links": {"Paper": "https://arxiv.org/abs/2505.24877", "Project": "https://nvlabs.github.io/AdaHuman/"}, "media": {"type": "video", "url": "https://huangyangyi.github.io/images/adahuman.mp4", "alt": "AdaHuman reconstruction and animation results."}}, {"id": "gavatar", "short": "GAvatar", "title": "GAvatar: Animatable 3D Gaussian Avatars with Implicit Mesh Learning", "authors": ["Ye Yuan*", "Xueting Li*", "Yangyi Huang", "Shalini De Mello", "Koki Nagano", "Jan Kautz", "Umar Iqbal"], "year": 2024, "venue": "CVPR 2024 · Highlight", "category": "vision", "selected": false, "summary": "Animatable Gaussian avatars with implicit mesh learning for text-driven 3D human generation.", "links": {"Paper": "https://arxiv.org/abs/2312.11461", "Project": "https://nvlabs.github.io/GAvatar"}, "media": {"type": "image", "url": "https://huangyangyi.github.io/images/gavatar_tn.jpg", "alt": "GAvatar project preview."}}, {"id": "tech", "short": "TeCH", "title": "TeCH: Text-guided Reconstruction of Lifelike Clothed Humans", "authors": ["Yangyi Huang*", "Hongwei Yi*", "Yuliang Xiu*", "Tingting Liao", "Jiaxiang Tang", "Deng Cai", "Justus Thies"], "year": 2024, "venue": "3DV · 2024", "category": "vision", "selected": true, "summary": "Reconstructing detailed, textured clothed humans from a single image with textual guidance and a personalized text-to-image prior.", "links": {"Paper": "https://arxiv.org/abs/2308.08545", "Code": "https://github.com/huangyangyi/TeCH", "Project": "https://huangyangyi.github.io/TeCH/"}, "media": {"type": "image", "url": "https://huangyangyi.github.io/images/tech.png", "alt": "TeCH single-image clothed-human reconstruction results."}}, {"id": "tada", "short": "TADA!", "title": "TADA! Text to Animatable Digital Avatars", "authors": ["Tingting Liao*", "Hongwei Yi*", "Yuliang Xiu", "Jiaxiang Tang", "Yangyi Huang", "Justus Thies", "Michael J. Black"], "year": 2024, "venue": "3DV · 2024", "category": "vision", "selected": false, "summary": "Expressive, animatable 3D avatars generated from text descriptions.", "links": {"Paper": "https://arxiv.org/abs/2308.10899", "Code": "https://github.com/TingtingLiao/TADA", "Project": "https://tada.is.tue.mpg.de/"}, "media": {"type": "image", "url": "https://huangyangyi.github.io/images/tada.jpg", "alt": "TADA text-to-avatar examples."}}, {"id": "elicit", "short": "ELICIT", "title": "One-shot Implicit Animatable Avatars with Model-based Priors", "authors": ["Yangyi Huang*", "Hongwei Yi*", "Weiyang Liu", "Haofan Wang", "Boxi Wu", "Wenxiao Wang", "Binbin Lin", "Debing Zhang", "Deng Cai"], "year": 2023, "venue": "ICCV · 2023", "category": "vision", "selected": false, "summary": "One-shot animatable avatar reconstruction with geometric and semantic model-based priors.", "links": {"Paper": "https://arxiv.org/abs/2212.02469", "Code": "https://github.com/huangyangyi/ELICIT", "Project": "https://huangyangyi.github.io/ELICIT/"}, "media": {"type": "image", "url": "https://huangyangyi.github.io/images/elicit.png", "alt": "ELICIT animatable avatar reconstruction examples."}}, {"id": "bevformer", "short": "BEVFormer++", "title": "BEVFormer++: Improving BEVFormer for 3D Camera-only Object Detection", "authors": ["Zhiqi Li*", "Hanming Deng*", "Tianyu Li*", "Yangyi Huang*", "Chonghao Sima*", "Xiangwei Geng*", "Yulu Gao*", "Wenhai Wang*", "Yang Li", "Lewei Lu"], "year": 2022, "venue": "Waymo Challenge · 2022", "category": "vision", "selected": false, "summary": "First-place solution in the 2022 Waymo Open Dataset Challenge’s camera-only 3D detection track.", "links": {"Report": "https://storage.googleapis.com/waymo-uploads/files/research/3DCam/3DCam_BEVFormer.pdf"}}, {"id": "fuseformer", "short": "FuseFormer", "title": "FuseFormer: Fusing Fine-Grained Information in Transformers for Video Inpainting", "authors": ["Rui Liu*", "Hanming Deng*", "Yangyi Huang*", "Xiaoyu Shi", "Lewei Lu", "Wenxiu Sun", "Xiaogang Wang", "Jifeng Dai", "Hongsheng Li"], "year": 2021, "venue": "ICCV · 2021", "category": "vision", "selected": false, "summary": "Fine-grained feature fusion in transformers for sharp, temporally coherent video inpainting.", "links": {"Paper": "https://arxiv.org/abs/2109.02974", "Code": "https://github.com/ruiliu-ai/FuseFormer"}, "media": {"type": "image", "url": "https://huangyangyi.github.io/images/fuseformer.png", "alt": "FuseFormer video inpainting method preview."}}]</script>
+<script>
 
-      gtag('config', 'G-4ML2Y9ZT9M');
-    </script>
+(() => {
+  'use strict';
+  const papers = JSON.parse(document.getElementById('paper-data').textContent);
+  const byId = new Map(papers.map(p => [p.id, p]));
+  const toast = document.getElementById('toast');
+  function notify(message) {
+    toast.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(notify.timer);
+    notify.timer = setTimeout(() => toast.classList.remove('show'), 2300);
+  }
 
-  </head>
+  // Never leave an empty decorative portrait box when the source is offline.
+  const photo = document.getElementById('portrait-img');
+  function showPortrait() {
+    if (photo.naturalWidth) {
+      photo.closest('figure').hidden = false;
+      document.querySelector('.intro').classList.add('has-portrait');
+    }
+  }
+  photo.addEventListener('load', showPortrait);
+  photo.addEventListener('error', () => {
+    photo.closest('figure').hidden = true;
+    document.querySelector('.intro').classList.remove('has-portrait');
+  });
+  if (photo.complete) showPortrait();
 
-  <body>
-    <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-      <tr style="padding:0px">
-        <td style="padding:0px">
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr style="padding:0px">
-              <td style="padding:2.5%;width:63%;vertical-align:middle">
-                <p class="name" style="text-align: center;">
-                  Yangyi Huang (黄洋逸)
-                </p>
-                <p>I am currently a PhD student at <a href="https://spherelab.ai/">Sphere Lab</a>, <a href="https://www.cuhk.edu.hk/">the Chinese University of Hong Kong</a>, supervised by <a href="https://wyliu.com/">Weiyang Liu</a>, as well as a visiting student at <a href="https://ydwen.github.io/">Yandong Wen</a>'s lab, <a href="https://www.westlake.edu.cn/">Westlake University</a>. 
-                </p>
-                <p> I interned at <a href="https://research.nvidia.com/labs/dair/">NVIDIA Research</a>, collaborating with <a href="ye-yuan.com">Ye Yuan</a> and <a href="https://www.umariqbal.info/">Umar Iqbal</a> and <a herf="https://sunshineatnoon.github.io/">Xueting Li</a> on digital human generation and reconstruction. 
-                Earlier, I worked with <a href="https://xyyhw.top/">Hongwei Yi</a>, <a href="https://xiuyuliang.cn/">Yuliang Xiu</a>, and <a href="https://justusthies.github.io/">Justus Thies</a> on related research in 3D human modeling and synthesis. </p> 
-                <p>
-                  In 2024, I received my Master's degree at <a href="http://www.cad.zju.edu.cn/english.html">State Key Lab of CAD&CG</a>, <a href="http://www.en.cs.zju.edu.cn/">College of Computer Science and Technology</a>  at <a href="https://www.zju.edu.cn/english/">Zhejiang University</a> under the supervision by <a href="http://www.cad.zju.edu.cn/home/dengcai/">Prof. Deng Cai</a>. Before that, I received my B.Eng(2017.09 - 2021.06) in Computer Science from the same department. 
-                  <!-- with an honor degree at Mixed Class, Chu Kochen Honor College. During my undergraduate studies, I enjoyed the challenges of competitive programming and participated in events such as ACM-ICPC and CCPC. -->
-                </p>
-                <p style="text-align:center">
-                  <a href="mailto:yyhuang@link.cuhk.edu.hk">Email</a> &nbsp;/&nbsp;
-                  <a href="https://scholar.google.com/citations?user=MzGqlqIAAAAJ&hl=zh-CN">Google Scholar</a> &nbsp;/&nbsp;
-                  <a href="https://twitter.com/yangyi_huang_cn">X</a> &nbsp;/&nbsp;
-                  <a href="https://github.com/huangyangyi/">Github</a>
-                </p>
-              </td>
-              <td style="padding:2.5%;width:40%;max-width:40%">
-                <a href="images/YangyiHuang.png"><img style="width:100%;max-width:100%" alt="profile photo" src="images/YangyiHuang.jpg" class="hoverZoomLink"></a>
-              </td>
-            </tr>
-          </tbody></table>
+  // Preview images and videos are fetched only when a reader opens a preview.
+  document.querySelectorAll('.paper-preview').forEach(details => {
+    details.addEventListener('toggle', () => {
+      const media = details.querySelector('[data-src]');
+      const status = details.querySelector('.media-status');
+      if (!details.open) {
+        if (media && media.tagName === 'VIDEO') media.pause();
+        return;
+      }
+      if (!media || media.hasAttribute('src')) return;
+      status.hidden = false;
+      const ready = () => { status.hidden = true; media.hidden = false; };
+      media.addEventListener(media.tagName === 'VIDEO' ? 'loadedmetadata' : 'load', ready, {once:true});
+      media.addEventListener('error', () => {
+        media.hidden = true;
+        status.textContent = 'Preview is unavailable here. Open the original below.';
+      }, {once:true});
+      media.src = media.dataset.src;
+      setTimeout(() => {
+        if (!status.hidden) status.textContent = 'Preview is taking longer to load. Open the original below.';
+      }, 10000);
+    });
+  });
 
-          <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20">
-            <tr>
-              <td>
-                <h2>News</h2>
-                <ul>
-                  <li><strong>06/2025</strong> <a href="https://nvlabs.github.io/AdaHuman"><strong>AdaHuman</strong></a> is accepted to ICCV 2025! </li>
-                  <li><strong>06/2025</strong> I am listed as an outstanding reviewer of <a href="https://cvpr.thecvf.com/Conferences/2025/ProgramCommittee#all-outstanding-reviewer">CVPR 2025</a>. Thank you for your trust!</li>
-                  <li><strong>05/2025</strong> I will be joining <a href="https://www.cuhk.edu.hk/">the Chinese University of Hong Kong</a> as a PhD student.</li>
-                  <li><strong>08/2023</strong> We released <a
-                      href="https://huangyangyi.github.io/TeCH/">TeCH</a> and <a href="https://tada.is.tue.mpg.de">TADA!</a> on arXiv!
-                  <li><strong>07/2023</strong> Our paper <a href="https://huangyangyi.github.io/ELICIT/"><strong>ELICIT</strong></a> is accepted to ICCV 2023!
-                  <li><strong>07/2023</strong> Invited to give a talk on <a href="https://ps.is.mpg.de/events/full-body-avatars-from-single-images-and-textual-guidance"><i>
-                    Full-body avatars from single images and textual guidance</i></a> at <a href="https://ps.is.tuebingen.mpg.de/">Perceiving Systems, MPI-IS</a> </li>
-                  </div>
-                </ul>
-              </td>
-            </tr>
+  document.querySelectorAll('[data-close-dialog]').forEach(button => {
+    button.addEventListener('click', () => document.getElementById(button.dataset.closeDialog).close());
+  });
+  document.querySelectorAll('dialog:not([data-cv-root])').forEach(dialog => {
+    dialog.addEventListener('click', event => {
+      if (event.target !== dialog) return;
+      const r = dialog.getBoundingClientRect();
+      if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close();
+    });
+  });
 
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-              <tr>
-              <td style="padding:20px;width:100%;vertical-align:middle">
-                <h2>Research</h2>
-                
-              </td>
-            </tr>
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr onmouseout="adahuman_stop()" onmouseover="adahuman_start()">
-              <td style="padding:20px;width:25%;vertical-align:middle">
-                <div class="one" style="vertical-align:middle">
-                  <div class="two" id='tech_video'><video  width=100% height=100% muted autoplay loop>
-                  <source src="images/adahuman.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                  </video></div>
-                  <!-- <img id='tech_image' src="images/gavatar_tn.png" width=100% style="display: block"> -->
-                </div>
-                <!-- <script type="text/javascript">
-                  function tech_start() {
-                    document.getElementById('tech_video').style.opacity = "1";
-                    document.getElementById('tech_image').style.opacity = "0";
-                  }
-      
-                  function tech_stop() {
-                    document.getElementById('tech_image').style.opacity = "1";
-                    document.getElementById('tech_video').style.opacity = "0";
-                  }
-                  tech_stop()
-                </script> -->
-              </td>
-              <td style="padding:20px;width:75%;vertical-align:middle">
-                <a href="https://nvlabs.github.io/AdaHuman">
-                  <span class="papertitle">AdaHuman: Animatable Detailed 3D Human Generation with Compositional Multiview Diffusion</span>
-                </a>
-                <br>
-                <strong>Yangyi Huang</strong>,
-                <a href="https://ye-yuan.com">Ye Yuan</a>,
-                <a href="https://sunshineatnoon.github.io/">Xueting Li</a>,
-                <a href="https://jankautz.com/">Jan Kautz</a>,
-                <a href="http://www.umariqbal.info/">Umar Iqbal</a>
-                <br>
-                <em>ICCV</em>, 2025 
-                <br>
-                <!-- <a href="https://arxiv.org/abs/2505.15000">arXiv</a>
-                / -->
-                <a href="https://nvlabs.github.io/AdaHuman">project</a>
-                <!-- /
-                <a href="https://youtu.be/PbCF1HzrKrs">video</a> -->
-                <p>
-                  AdaHuman generates detailed animatable 3D avatars from a single image, incorporating (1) pose-conditioned 3D joint diffusion and (2) compositional 3DGS refinement.
-                </p>
-              </td>
-            </tr>
-      <tr onmouseout="gavatar_stop()" onmouseover="gavatar_start()">
-        <td style="padding:20px;width:25%;vertical-align:middle">
-          <div class="one" style="vertical-align:middle">
-            <div class="two" id='tech_video'><video  width=100% height=100% muted autoplay loop>
-            <source src="images/gavatar_tn.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-            </video></div>
-            <!-- <img id='tech_image' src="images/gavatar_tn.png" width=100% style="display: block"> -->
-          </div>
-          <!-- <script type="text/javascript">
-            function tech_start() {
-              document.getElementById('tech_video').style.opacity = "1";
-              document.getElementById('tech_image').style.opacity = "0";
-            }
+  // Local BibTeX is explicitly a draft, not an official proceedings citation.
+  const citation = document.getElementById('cite-dialog');
+  const text = document.getElementById('citation-text');
+  function bibtex(p) {
+    const url = Object.values(p.links).find(u => u.includes('arxiv.org/abs/'));
+    const names = p.authors.map(n => n.replace(/\*/g, '')).join(' and ');
+    let content = '@misc{' + p.id + p.year + ',\n  title = {' + p.title + '},\n  author = {' + names + '},\n';
+    if (url) {
+      const id = url.split('/').pop();
+      content += '  year = {' + ('20' + id.slice(0,2)) + '},\n  eprint = {' + id + '},\n  archivePrefix = {arXiv},\n  url = {' + url + '}\n}';
+    } else {
+      content += '  year = {' + p.year + '},\n  howpublished = {' + p.venue + '},\n  url = {' + Object.values(p.links)[0] + '}\n}';
+    }
+    return content;
+  }
+  document.querySelectorAll('[data-cite]').forEach(button => {
+    if (typeof citation.showModal !== 'function') return;
+    button.hidden = false;
+    button.addEventListener('click', () => {
+      const p = byId.get(button.dataset.cite);
+      document.getElementById('citation-title').textContent = p.short;
+      text.value = bibtex(p);
+      citation.showModal();
+    });
+  });
+  document.getElementById('copy-citation').addEventListener('click', async () => {
+    try {
+      if (!navigator.clipboard) throw new Error('Clipboard API unavailable');
+      await navigator.clipboard.writeText(text.value);
+      notify('Citation copied');
+    } catch (_) {
+      text.focus(); text.select();
+      let copied = false;
+      try { copied = document.execCommand('copy'); } catch (_) {}
+      notify(copied ? 'Citation copied' : 'Press Command-C or Ctrl-C to copy.');
+    }
+  });
+  document.getElementById('download-citation').addEventListener('click', () => {
+    const url = URL.createObjectURL(new Blob([text.value], {type:'application/x-bibtex;charset=utf-8'}));
+    const anchor = document.createElement('a');
+    anchor.href = url; anchor.download = 'citation.bib'; anchor.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+})();
 
-            function tech_stop() {
-              document.getElementById('tech_image').style.opacity = "1";
-              document.getElementById('tech_video').style.opacity = "0";
-            }
-            tech_stop()
-          </script> -->
-        </td>
-        <td style="padding:20px;width:75%;vertical-align:middle">
-          <a href="https://nvlabs.github.io/GAvatar">
-            <span class="papertitle">GAvatar: Animatable 3D Gaussian Avatars with Implicit Mesh Learning</span>
-          </a>
-          <br>
-          <a href="https://ye-yuan.com">Ye Yuan*</a>,
-          <a href="https://sunshineatnoon.github.io/">Xueting Li</a>*,
-          <strong>Yangyi Huang</strong>,
-          <a href="https://research.nvidia.com/person/shalini-de-mello">Shalini De Mello</a>,
-          <a href="https://luminohope.org/">Koki Nagano</a>,
-          <a href="https://jankautz.com/">Jan Kautz</a>,
-          <a href="http://www.umariqbal.info/">Umar Iqbal</a>
-          (* denotes equal contribution)
-          <br>
-          <em>CVPR</em>, 2024 (Highlight)
-          <br>
-          <a href="https://arxiv.org/abs/2312.11461">arXiv</a>
-          /
-          <a href="https://nvlabs.github.io/GAvatar">project</a>
-          /
-          <a href="https://youtu.be/PbCF1HzrKrs">video</a>
-          <p></p>
-          <p>
-            We seek to leverage Gaussian splatting to generate realistic animatable avatars from textual descriptions, addressing the limitations (e.g., flexibility and efficiency) imposed by mesh or NeRF-based representations.
-          </p>
-        </td>
-      </tr>
-    
-      <tr onmouseout="tech_stop()" onmouseover="tech_start()"  bgcolor="#ffffd0">
-        <td style="padding:20px;width:25%;vertical-align:middle">
-          <div class="one" style="vertical-align:middle">
-            <div class="two" id='tech_video'><video  width=100% height=100% muted autoplay loop>
-            <source src="images/tech.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-            </video></div>
-            <!-- <img id='tech_image' src="images/tech.png" width=100% style="display: block"> -->
-          </div>
-          <!-- <script type="text/javascript">
-            function tech_start() {
-              document.getElementById('tech_video').style.opacity = "1";
-              document.getElementById('tech_image').style.opacity = "0";
-            }
+</script>
+<script>
+/* Shared by the homepage dialog and the standalone CV. No network dependency. */
+(() => {
+  'use strict';
+  const roots = Array.from(document.querySelectorAll('[data-cv-root]'));
+  if (!roots.length) return;
+  const storageKey = 'yangyi-cv-language';
+  const languageCode = { en: 'en', zh: 'zh-CN' };
+  const labels = {
+    en: { title: 'Curriculum vitae', print: 'Print / Save PDF', close: 'Close curriculum vitae', back: '← Homepage', file: 'Yangyi Huang - CV - EN' },
+    zh: { title: '个人简历', print: '打印 / 保存 PDF', close: '关闭简历', back: '← 返回主页', file: '黄洋逸 - 简历 - 中文' }
+  };
+  const isLanguage = value => value === 'en' || value === 'zh';
+  const normalize = value => value && value.toLowerCase().startsWith('zh') ? 'zh' : value;
+  let savedLanguage;
+  try { savedLanguage = localStorage.getItem(storageKey); } catch (_) { /* file:// / private mode */ }
+  let queryLanguage;
+  try { queryLanguage = normalize(new URLSearchParams(location.search).get('lang')); } catch (_) {}
+  let printState = null;
 
-            function tech_stop() {
-              document.getElementById('tech_image').style.opacity = "1";
-              document.getElementById('tech_video').style.opacity = "0";
-            }
-            tech_stop()
-          </script> -->
-        </td>
-        <td style="padding:20px;width:75%;vertical-align:middle">
-          <a href="https://huangyangyi.github.io/TeCH/">
-            <span class="papertitle">TeCH: Text-guided Reconstruction of Lifelike Clothed Humans</span>
-          </a>
-          <br>
-          <strong>Yangyi Huang*</strong>,
-          <a href="https://xyyhw.top">Hongwei Yi*</a>,
-          <a href="https://xiuyuliang.cn">Yuliang Xiu*</a>,
-          <a href="https://github.com/TingtingLiao">Tingting Liao</a>,
-          <a href="https://me.kiui.moe/">Jiaxiang Tang</a>,
-          <a href="http://www.cad.zju.edu.cn/home/dengcai/">Deng Cai</a>,
-          <a href="https://justusthies.github.io/">Justus Thies</a>
-          (* denotes equal contribution)
-          <br>
-          <em>3DV</em>, 2024
-          <br>
-          <a href="https://github.com/huangyangyi/TeCH">code</a>
-          /
-          <a href="https://arxiv.org/abs/2308.08545">arXiv</a>
-          /
-          <a href="https://huangyangyi.github.io/TeCH/">project</a>
-          /
-          <a href="https://youtu.be/SjzQ6158Pho">video</a>
-          <p></p>
-          <p>
-          We reconstruct high-resolution textured meshes for clothed humans from single images, with textual guidance from a VQA model and a few-shot finetuned T2I model.
-          </p>
-        </td>
-      </tr>
-      
-      
-      <tr onmouseout="tada_stop()" onmouseover="tada_start()">
-        <td style="padding:20px;width:25%;vertical-align:middle">
-          <div class="one" style="vertical-align:middle">
-            <div class="two" id='tada_video'><video  width=100% height=100% muted autoplay loop>
-            <source src="images/tada.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-            </video></div>
-            <!-- <img id='tada_image' src="images/tada.jpg" width=100% style="display: block"> -->
-          </div>
-          <!-- <script type="text/javascript">
-            function tada_start() {
-              document.getElementById('tada_video').style.opacity = "1";
-              document.getElementById('tada_image').style.opacity = "0";
-            }
+  roots.forEach(root => {
+    const isDialog = root.tagName === 'DIALOG';
+    const buttons = root.querySelectorAll('[data-cv-language]');
+    const sheets = root.querySelectorAll('[data-cv-panel]');
+    let previousOverflow = '';
+    let opener = null;
 
-            function tada_stop() {
-              document.getElementById('tada_image').style.opacity = "1";
-              document.getElementById('tada_video').style.opacity = "0";
-            }
-            tada_stop()
-          </script> -->
-        </td>
-        <td style="padding:20px;width:75%;vertical-align:middle">
-          <a href="https://tada.is.tue.mpg.de/">
-            <span class="papertitle">TADA! Text to Animatable Digital Avatars</span>
-          </a>
-          <br>
-          <a href="https://github.com/TingtingLiao">Tingting Liao*</a>,
-          <a href="https://xyyhw.top">Hongwei Yi*</a>,
-          <a href="https://xiuyuliang.cn">Yuliang Xiu</a>,
-          <a href="https://me.kiui.moe/">Jiaxiang Tang</a>,
-          <strong>Yangyi Huang</strong>,
-          <a href="https://justusthies.github.io/">Justus Thies</a>,
-          <a href="https://ps.is.mpg.de/~black">Michael J. Black</a>
-          <br>
-          <em>3DV</em>, 2024
-          <br>
-          <a href="https://github.com/TingtingLiao/TADA">code</a>
-          /
-          <a href="https://arxiv.org/abs/2308.10899">arXiv</a>
-          /
-          <a href="https://tada.is.tue.mpg.de/">project</a>
-          /
-          <a href="https://youtu.be/w5rdcPQWktE">video</a>
-          <p></p>
-          <p>
-            We create expressive 3D avatars from text, based on T2I (I: image; T: text) model.
-          </p>
-        </td>
-      </tr>
-      
-      <tr onmouseout="elicit_stop()" onmouseover="elicit_start()" bgcolor="#ffffd0">
-        <td style="padding:20px;width:25%;vertical-align:middle">
-          <div class="one" style="vertical-align:middle">
-            <div class="two" id='elicit_video'><video width=100% height=100% muted autoplay loop>
-            <source src="images/elicit.mov" type="video/mp4">
-            Your browser does not support the video tag.
-            </video></div>
-            <!-- <img id='elicit_image' src="images/elicit.png" width=100% style="display: block"> -->
-          </div>
-          <!-- <script type="text/javascript">
-            function elicit_start() {
-              document.getElementById('elicit_video').style.opacity = "1";
-              document.getElementById('elicit_image').style.opacity = "0";
-            }
+    function setLanguage(language, remember = true, changeURL = false) {
+      if (!isLanguage(language)) language = 'en';
+      root.dataset.cvLang = language;
+      root.lang = languageCode[language];
+      sheets.forEach(sheet => { sheet.hidden = sheet.dataset.cvPanel !== language; });
+      buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.cvLanguage === language)));
+      const label = root.querySelector('[data-cv-label]');
+      const close = root.querySelector('[data-cv-close]');
+      const back = root.querySelector('[data-cv-back]');
+      if (label) label.textContent = labels[language].title;
+      if (close) close.setAttribute('aria-label', labels[language].close);
+      if (back) back.textContent = labels[language].back;
+      root.querySelector('[data-print-cv]').textContent = labels[language].print;
+      if (!isDialog) {
+        document.documentElement.lang = languageCode[language];
+        document.title = labels[language].file;
+        if (changeURL) {
+          try {
+            const url = new URL(location.href);
+            url.searchParams.set('lang', language);
+            history.replaceState(null, '', url);
+          } catch (_) { /* Some local-file browsers restrict replaceState. */ }
+        }
+      }
+      if (remember) {
+        try { localStorage.setItem(storageKey, language); } catch (_) {}
+      }
+    }
+    const initialLanguage = isLanguage(queryLanguage) ? queryLanguage :
+      isLanguage(savedLanguage) ? savedLanguage : root.dataset.cvLang || 'en';
+    setLanguage(initialLanguage, false, false);
+    buttons.forEach(button => button.addEventListener('click', () => setLanguage(button.dataset.cvLanguage, true, true)));
+    root.querySelector('[data-print-cv]').addEventListener('click', () => window.print());
 
-            function elicit_stop() {
-              document.getElementById('elicit_image').style.opacity = "1";
-              document.getElementById('elicit_video').style.opacity = "0";
-            }
-            elicit_stop()
-          </script> -->
-        </td>
-        <td style="padding:20px;width:75%;vertical-align:middle">
-          <a href="https://elicit.is.tue.mpg.de/">
-            <span class="papertitle">One-shot Implicit Animatable Avatars with
-              Model-based Priors</span>
-          </a>
-          <br>
-          <strong>Yangyi Huang*</strong>,
-          <a href="https://xyyhw.top">Hongwei Yi*</a>,
-          <a href="https://wyliu.com/">Weiyang Liu</a>,
-          <a href="https://haofanwang.github.io/">Haofan Wang</a>,
-          <a href="https://scholar.google.com/citations?user=AqDe35sAAAAJ">Boxi Wu</a>,
-          <a href="https://www.wenxiaowang.com/">Wenxiao Wang</a>,
-          <a href="https://scholar.google.com/citations?user=Zmvq4KYAAAAJ">Binbin Lin</a>,
-          <a href="https://www.linkedin.com/in/%E5%BE%B7%E5%85%B5-%E5%BC%A0-a6451aa9?">Debing Zhang</a>,
-          <a href="http://www.cad.zju.edu.cn/home/dengcai/">Deng Cai</a>(* denotes equal contribution)
-          <br>
-          <em>ICCV</em>, 2023
-          <br>
-          <a href="https://github.com/huangyangyi/ELICIT">code</a>
-          /
-          <a href="https://arxiv.org/abs/2212.02469">arXiv</a>
-          /
-          <a href="https://huangyangyi.github.io/ELICIT">project</a>
-          <p></p>
-          <p>
-            We create a animatable NeRF-based avatar reconstruction from a single image with model-based prior.
-          </p>
-        </td>
-      </tr>
-      
-      <tr>
-        <td style="padding:20px;width:25%;vertical-align:middle">
-          <img src="images/bevformer++.png" width=100% style="display: block">
-        </td>
-        <td style="padding:20px;width:75%;vertical-align:middle">
-          <a href="BEVFormer++: Improving BEVFormer for 3D Camera-only Object Detection">
-            <span class="papertitle">BEVFormer++: Improving BEVFormer for 3D Camera-only Object Detection</span>
-          </a>
-          <br>
-          <a href="https://zhiqi-li.github.io/">Zhiqi Li*</a>, 
-          <a href="https://scholar.google.com/citations?hl=en&user=NSeqMYIAAAAJ">Hanming Deng*</a>, 
-          <a href="https://github.com/sephyli">Tianyu Li*</a>, 
-          <strong>Yangyi Huang*</strong>, 
-          <a href="https://github.com/ChonghaoSima">Chonghao Sima</a>*, 
-          <a href="https://scholar.google.com/citations?user=GqOe2s0AAAAJ&hl=en">Xiangwei Geng</a>*, 
-          <a href="https://scholar.google.com/citations?hl=en&user=s3u33VAAAAAJ">Yulu Gao*</a>, 
-          <a href="https://whai362.github.io/">Wenhai Wang*</a>, 
-          Yang Li, 
-          <a href="https://scholar.google.com/citations?user=zdgKJXIAAAAJ">Lewei Lu</a>
-          <br>
-          1st place solution for Waymo Open Dataset Challenge 2022
-          <br>
-          <a href="https://storage.googleapis.com/waymo-uploads/files/research/3DCam/3DCam_BEVFormer.pdf">report</a>
-          <p></p>
-          <p>
-            We enhanced BEVFormer, a DETR-based 3D detection model, with efficient techniques.
-          </p>
-        </td>
-      </tr>
+    if (isDialog) {
+      document.querySelectorAll('[data-open-cv]').forEach(link => {
+        link.addEventListener('click', event => {
+          if (typeof root.showModal !== 'function') return; // Native link to cv.html is the fallback.
+          event.preventDefault();
+          if (root.open) return;
+          opener = link;
+          previousOverflow = document.body.style.overflow;
+          root.showModal();
+          root.scrollTop = 0;
+          document.body.classList.add('cv-mode');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+      root.querySelector('[data-cv-close]').addEventListener('click', () => root.close());
+      root.addEventListener('close', () => {
+        document.body.classList.remove('cv-mode');
+        document.body.style.overflow = previousOverflow;
+        if (opener && document.contains(opener)) opener.focus({ preventScroll: true });
+      });
+      root.addEventListener('click', event => {
+        if (event.target !== root) return;
+        const r = root.getBoundingClientRect();
+        if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) root.close();
+      });
+    }
+  });
 
-      <tr bgcolor="#ffffd0">
-        <td style="padding:20px;width:25%;vertical-align:middle">
-          <img src="images/fuseformer.png" width=100% style="display: block">
-        </td>
-        <td style="padding:20px;width:75%;vertical-align:middle">
-          <a href="FuseFormer: Fusing Fine-Grained Informationin TransformersforVideoInpainting">
-            <span class="papertitle">FuseFormer: Fusing Fine-Grained Information in Transformers for Video Inpainting</span>
-          </a>
-          <br>
-          <a href="https://ruiliu-ai.github.io/">Rui Liu*</a>, 
-          <a href="https://scholar.google.com/citations?hl=en&user=NSeqMYIAAAAJ">Hanming Deng*</a>, 
-          <strong>Yangyi Huang*</strong>, 
-          <a href="https://xiaoyushi97.github.io/">Xiaoyu Shi</a>, 
-          <a href="https://scholar.google.com/citations?user=zdgKJXIAAAAJ">Lewei Lu</a>
-          <a href="http://wenxiusun.com/">Wenxiu Sun</a>, 
-          <a href="https://www.ee.cuhk.edu.hk/~xgwang/">Xiaogang Wang</a>, 
-          <a href="https://jifengdai.org/">Jifeng Dai</a>, 
-          <a href="https://www.ee.cuhk.edu.hk/~hsli/">Hongsheng Li</a>
-          (* denotes equal contribution)
-          <br>
-          <em>ICCV</em>, 2021
-          <br>
-          <a href="https://github.com/ruiliu-ai/FuseFormer">code</a>
-          /
-          <a href="https://arxiv.org/abs/2109.02974">arXiv</a>
-          <p></p>
-          <p>
-            We proposed a Transformer-based model to inpaint videos with sharp and realistic results.
-          </p>
-        </td>
-      </tr>
-      
-      <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-        <tr>
-        <td style="padding:20px;width:100%;vertical-align:middle">
-          <h2>Service</h2>
-          <p>
-            Reviewer for CVPR, ICCV, TVCG, SIGGRAPH, and ACM-MM.
-          </p>
-        </td>
-      </tr>
-    </tbody></table>
-    <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          </tbody></table>
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-              <td style="padding:0px">
-                <br>
-                <p style="text-align:right;font-size:small;">
-                  This site is based on <a href="https://github.com/jonbarron/jonbarron_website">Jon Barron</a>'s template.
-                </p>
-              </td>
-            </tr>
-          </tbody></table>
-        </td>
-      </tr>
-    </table>
-  </body>
+  // The same path handles the toolbar print button and Cmd/Ctrl+P.
+  window.addEventListener('beforeprint', () => {
+    if (printState) return;
+    const active = roots.find(root => root.tagName !== 'DIALOG' || root.open);
+    if (!active) return;
+    const sheet = active.querySelector('[data-cv-panel]:not([hidden])');
+    if (!sheet) return;
+    const container = document.createElement('div');
+    container.id = 'cv-print-root';
+    const clone = sheet.cloneNode(true);
+    clone.removeAttribute('id');
+    clone.querySelectorAll('[id]').forEach(node => node.removeAttribute('id'));
+    container.appendChild(clone);
+    document.body.appendChild(container);
+    printState = { title: document.title, container };
+    document.title = labels[active.dataset.cvLang].file;
+    document.body.classList.add('cv-printing');
+  });
+  window.addEventListener('afterprint', () => {
+    if (!printState) return;
+    printState.container.remove();
+    document.title = printState.title;
+    document.body.classList.remove('cv-printing');
+    printState = null;
+  });
+})();
+
+</script>
+</body>
 </html>
