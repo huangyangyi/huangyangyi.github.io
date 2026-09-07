@@ -42,11 +42,11 @@ sup { font-size: .7em; }
 h1 { font: 400 37px/1.2 Georgia, "Times New Roman", serif; letter-spacing: -.8px; margin-bottom: 23px; }
 .name-cn { font: 400 20px/1.3 var(--sans); letter-spacing: .04em; margin-left: 12px; color: #555d65; white-space: nowrap; }
 .intro-row { display: block; }
-.intro.has-portrait .intro-row { display: grid; grid-template-columns: minmax(0, 1fr) 142px; gap: 34px; align-items: start; }
+.intro.has-portrait .intro-row { display: grid; grid-template-columns: minmax(0, 1fr) 180px; gap: 34px; align-items: start; }
 .biography p + p { margin-top: 11px; }
-.biography .previous { color: #575e65; font-size: 14px; }
+.intro > .previous { margin-top: 15px; color: #575e65; font-size: 14px; }
 .portrait { margin-top: 4px; }
-.portrait img { width: 142px; height: 172px; display: block; object-fit: cover; border-radius: 2px; }
+.portrait img { width: 180px; height: auto; aspect-ratio: 1 / 1; display: block; object-fit: contain; border-radius: 2px; }
 .profile-links { display: flex; flex-wrap: wrap; gap: 0; margin-top: 16px; font-size: 14px; }
 .profile-links a + a::before { content: "/"; display: inline-block; margin: 0 11px; color: #b1b6bb; text-decoration: none; }
 .section { margin-top: 35px; }
@@ -147,9 +147,9 @@ dialog::backdrop { background: rgb(25 31 36 / .28); }
   h1 { font-size: 32px; margin-bottom: 20px; }
   .name-cn { font-size: 18px; margin-left: 9px; }
   .intro.has-portrait .intro-row { grid-template-columns: minmax(0,1fr) 100px; gap: 20px; }
-  .portrait img { width: 100px; height: 124px; }
+  .portrait img { width: 100px; height: auto; }
   .biography { font-size: 14px; }
-  .biography .previous { font-size: 13px; }
+  .intro > .previous { font-size: 13px; }
   .paper h3 { font-size: 15px; }
   .paper .summary { font-size: 13px; }
   .news-list { font-size: 13px; }
@@ -262,6 +262,12 @@ dialog::backdrop { background: rgb(25 31 36 / .28); }
 <div class="biography">
 <p>I am a Ph.D. student at <a href="https://www.cuhk.edu.hk/" rel="noopener noreferrer" target="_blank">The Chinese University of Hong Kong</a>, working with <a href="https://wyliu.com/" rel="noopener noreferrer" target="_blank">Weiyang Liu</a> at <a href="https://spherelab.ai/" rel="noopener noreferrer" target="_blank">Sphere Lab</a>.</p>
 <p>My research focuses on <strong>training and adapting foundation models</strong>, especially post-training, parameter-efficient adaptation, and model geometry. I study how models acquire new capabilities while retaining existing ones.</p>
+
+</div>
+<figure class="portrait" hidden="">
+<img alt="Profile photograph" decoding="async" height="400" id="portrait-img" src="images/YangyiHuang.jpg?v=20260907" width="400"/>
+</figure>
+</div>
 <p class="previous">Previously, I worked on 3D vision and generative modeling, including research at <a href="https://research.nvidia.com/labs/dair/" rel="noopener noreferrer" target="_blank">NVIDIA</a>. I received my master’s and bachelor’s degrees from Zhejiang University, where I worked with <a href="http://www.cad.zju.edu.cn/home/dengcai/" rel="noopener noreferrer" target="_blank">Deng Cai</a>.</p>
 <nav aria-label="Profile links" class="profile-links">
 <a href="mailto:yyhuang@link.cuhk.edu.hk">Email</a>
@@ -270,11 +276,6 @@ dialog::backdrop { background: rgb(25 31 36 / .28); }
 <a data-open-cv="" href="cv.html">CV</a>
 <a href="https://twitter.com/yangyi_huang_cn" rel="noopener noreferrer" target="_blank">X</a>
 </nav>
-</div>
-<figure class="portrait" hidden="">
-<img alt="Profile photograph" decoding="async" height="172" id="portrait-img" src="images/YangyiHuang.jpg?v=20260907" width="142"/>
-</figure>
-</div>
 </header>
 <section aria-labelledby="news-heading" class="section news">
 <h2 id="news-heading">News</h2>
